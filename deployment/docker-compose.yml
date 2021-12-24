@@ -14,7 +14,7 @@ services:
       - backend
       - frontend
     env_file:
-      - ../.env
+      - env_dir/flask.env
     command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "32", "--threads","8", "--timeout", "180", "wsgi:app"]
   openresty:
     build:
