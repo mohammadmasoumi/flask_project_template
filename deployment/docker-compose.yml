@@ -15,7 +15,42 @@ services:
       - frontend
     env_file:
       - env_dir/flask.env
-    command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "32", "--threads","8", "--timeout", "180", "wsgi:app"]
+    command: [ "gunicorn", "-b", "0.0.0.0:8000", "--workers", "32", "--threads","8", "--timeout", "180", "wsgi:app" ]
+    depends_on:
+      - mongo
+      - redis
+
+
+  celery_worker1:
+    restart: always
+    build:
+      context: ..
+      dockerfile: ../src/Dockerfile
+    image: celery_worker1
+    container_name: celery_worker1
+    env_file:
+      - env_dir/flask.env
+    network_mode: host
+    command: [ "celery", "-A", "tasks.test.celery", "worker","-B", "-Q", "test","--concurrency","1" ]
+    depends_on:
+      - app_server
+      - mongo
+      - redis
+
+  celery_beat:
+    build:
+      context: ..
+      dockerfile: ../src/Dockerfile
+    image: celery_beat
+    container_name: celery_beat
+    command: /start-celerybeat
+    env_file:
+      - env_dir/flask.env
+    depends_on:
+      - app_server
+      - mongo
+      - redis
+
   openresty:
     build:
       context: dockerfile/openresty
@@ -35,6 +70,7 @@ services:
     volumes:
       - ./data/nginx:/etc/nginx/conf.d:ro
       - ./data/lua:/home/user/lua:ro
+
   mongo:
     image: mongo
     container_name: mongodb
@@ -51,6 +87,7 @@ services:
     volumes:
       - ./data/mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
       - mongo-data:/data/db
+
   redis:
     image: redis
     container_name: redis
