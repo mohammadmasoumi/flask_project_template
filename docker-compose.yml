@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  app_server:
+    restart: always
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: "${REG}/${STAGE}/app_server:${TAG}"
+    container_name: app_server
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+#    volumes:
+#      - "./src:/app"
+    network_mode: host
+    command: ["gunicorn", "-b", "0.0.0.0:8000", "--workers", "32", "--threads","8", "--timeout", "180", "wsgi:app"]

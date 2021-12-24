@@ -1,4 +1,11 @@
-# flask_project_template
+# Flask Template 
+
+This ia a template project which is written in flask, celery and pymongo.
 
 
-This is a flask - ready to deploy on production - project template which using pymongo and celery.
+### Setup
+
+ - install requirements
+    ```shell
+   pip install -r requirements.txt
+    ```
