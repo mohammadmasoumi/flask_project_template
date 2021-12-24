@@ -1,3 +1,0 @@
-REDIS_SENTINEL=sentinel://localhost:26379;sentinel://localhost:26380;sentinel://localhost:26381
-REDIS_SENTINEL_MASTER=master-node
-REDIS_PASSWORD=1234
