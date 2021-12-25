@@ -20,7 +20,6 @@ services:
       - mongo
       - redis
 
-
   celery_worker1:
     restart: always
     build:
@@ -43,7 +42,7 @@ services:
       dockerfile: ../src/Dockerfile
     image: celery_beat
     container_name: celery_beat
-    command: /start-celerybeat
+    command: [ "celery", "-A", "tasks.test.celery", "beat" ]
     env_file:
       - env_dir/flask.env
     depends_on:
