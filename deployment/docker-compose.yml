@@ -15,7 +15,7 @@ services:
       - frontend
     env_file:
       - env_dir/flask.env
-    command: [ "gunicorn", "-b", "0.0.0.0:8000", "--workers", "32", "--threads","8", "--timeout", "180", "wsgi:app" ]
+    command: [ "gunicorn", "-b", "0.0.0.0:5000", "--workers", "32", "--threads","8", "--timeout", "180", "app:app" ]
     depends_on:
       - mongo
       - redis

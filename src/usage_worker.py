@@ -1,7 +1,6 @@
 from celery import Celery
-from celery.schedules import crontab
 
-from src.app import create_worker_app
+from src.project.app import create_worker_app
 # from src.tasks.long_task import log
 # from src.tasks.long_task import reverse_messages
 

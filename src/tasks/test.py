@@ -1,4 +1,4 @@
-from src.app import create_worker_app
+from src.project.app import create_worker_app
 from src.extensions import celery
 
 app = create_worker_app()

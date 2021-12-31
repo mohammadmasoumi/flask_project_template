@@ -1,43 +1,16 @@
-import logging
-import sys
+from project import create_app
 
-from flask import Flask
-
-from src.config import config
-from src.controllers import register_blueprints
-from src.extensions import register_extensions
-
-__all__ = (
-    'create_app',
-    'create_worker_app'
-)
+app = create_app()
 
 
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(config)
-    app.url_map.strict_slashes = False
-
-    # log level
-    logging.basicConfig(level=logging.getLevelName(app.config['LOG_LEVEL']))
-    logging.StreamHandler(sys.stdout)
-
-    # register
-    register_extensions(app)
-    register_blueprints(app)
-
-    return app
+@app.route("/")
+def hello_world():
+    return "Hello, World!"
 
 
-def create_worker_app():
-    """Minimal App without routes for celery worker."""
-    app = Flask(__name__)
-    app.config.from_object(config)
-
-    # log level
-    logging.basicConfig(level=logging.getLevelName(app.config['LOG_LEVEL']))
-    logging.StreamHandler(sys.stdout)
-
-    register_extensions(app, worker=True)
-
-    return app
+if __name__ == '__main__':
+    app.run(
+        debug=True,
+        use_reloader=True,
+        host='0.0.0.0'
+    )
