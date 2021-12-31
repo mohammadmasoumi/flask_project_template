@@ -6,6 +6,7 @@ BASEDIR = os.path.abspath(os.path.dirname(__name__))
 
 PROJECT_NAME = 'app_server'
 ENV = get_env_var("FLASK_ENV", "production")
+FLASK_APP = 'app'
 
 # logging
 LOG_LEVEL = get_env_var("LOG_LEVEL", "DEBUG")
