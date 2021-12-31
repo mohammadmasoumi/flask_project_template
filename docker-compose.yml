@@ -15,6 +15,7 @@ services:
       - frontend
     env_file:
       - deployment/env_dir/flask.env
+    command: [ "gunicorn", "--config", "config.py", "--log-level","debug", "--timeout", "180", "app:app" ]
     depends_on:
       - mongo
       - redis

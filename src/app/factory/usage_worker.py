@@ -1,6 +1,6 @@
 from celery import Celery
 
-from src.factory import create_worker_app
+from src.app.factory import create_worker_app
 
 
 # from src.tasks.long_task import log

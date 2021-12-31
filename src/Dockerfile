@@ -6,8 +6,10 @@ ENV GROUP_ID=2000 \
     USER_ID=2000 \
     USER_NAME=flask
 
-COPY / /src
-WORKDIR /src
+
+
+COPY /app /src/app
+WORKDIR src
 
 RUN apt-get update \
     && apt-get -y install libsnappy-dev \
@@ -19,5 +21,3 @@ RUN apt-get update \
 
 USER $USER_NAME
 EXPOSE 5000
-
-CMD [ "gunicorn", "app:app", "--config=config.py", "--log-level=debug"]

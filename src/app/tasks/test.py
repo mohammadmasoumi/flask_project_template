@@ -1,5 +1,5 @@
-from src.extensions import celery
-from src.factory import create_worker_app
+from src.app.factory.extensions import celery
+from src.app.factory import create_worker_app
 
 app = create_worker_app()
 

@@ -1,7 +1,7 @@
 from celery import Celery
 from flask_pymongo import PyMongo
 
-from src.config import celery_config
+from src.app.config import celery_config
 
 __all__ = (
     'celery',

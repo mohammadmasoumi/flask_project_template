@@ -3,9 +3,9 @@ import sys
 
 from flask import Flask
 
-from src.config import config
-from src.controllers import register_blueprints
-from src.extensions import register_extensions
+from src.app.config import config
+# from src.controllers import register_blueprints
+from src.app.factory.extensions import register_extensions
 
 __all__ = (
     'create_app',
@@ -24,7 +24,7 @@ def create_app():
 
     # register
     register_extensions(app)
-    register_blueprints(app)
+    # register_blueprints(app)
 
     return app
 
