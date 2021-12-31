@@ -4,12 +4,12 @@ services:
   app_server:
     restart: always
     build:
-      context: ..
-      dockerfile: ../src/Dockerfile
+      context: ../src/
+      dockerfile: Dockerfile
     image: app_server
     container_name: app_server
     ports:
-      - "8000:8000"
+      - "5000:5000"
     networks:
       - backend
       - frontend
@@ -23,8 +23,8 @@ services:
   celery_worker1:
     restart: always
     build:
-      context: ..
-      dockerfile: ../src/Dockerfile
+      context: ../src
+      dockerfile: Dockerfile
     image: celery_worker1
     container_name: celery_worker1
     env_file:
@@ -38,8 +38,8 @@ services:
 
   celery_beat:
     build:
-      context: ..
-      dockerfile: ../src/Dockerfile
+      context: ../src
+      dockerfile: Dockerfile
     image: celery_beat
     container_name: celery_beat
     command: [ "celery", "-A", "tasks.test.celery", "beat" ]
@@ -90,7 +90,7 @@ services:
   redis:
     image: redis
     container_name: redis
-    restart:: always
+    restart: always
     networks:
       - backend
     dns:
