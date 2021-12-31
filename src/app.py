@@ -1,4 +1,4 @@
-from project import create_app
+from factory import create_app
 
 app = create_app()
 
@@ -9,10 +9,9 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    print("Hellllllllllllllllllllllllllllllllllo")
     app.run(
         debug=True,
         use_reloader=True,
-        host='0.0.0.0',
-        port=5000
+        host=app.config["APP_HOST"],
+        port=app.config["APP_PORT"]
     )

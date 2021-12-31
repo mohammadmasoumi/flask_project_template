@@ -19,12 +19,12 @@ MONGO_USERNAME = get_env_var('MONGO_USERNAME', default='challenge', prefixed=Tru
 MONGO_PASSWORD = get_env_var('MONGO_PASSWORD', default='challenge', prefixed=True)
 
 # redis env
-REDIS_HOST = get_env_var('REDIS_HOST', '')
-REDIS_SENTINEL = get_env_var('REDIS_SENTINEL', '')
-REDIS_PORT = get_env_var('REDIS_PORT', '')
-REDIS_DB = get_env_var('REDIS_DB', '')
-REDIS_PASSWORD = get_env_var('REDIS_PASSWORD', '')
-REDIS_SENTINEL_MASTER = get_env_var('REDIS_SENTINEL_MASTER', '')
+REDIS_HOST = get_env_var('REDIS_HOST', '', prefixed=True)
+REDIS_SENTINEL = get_env_var('REDIS_SENTINEL', '', prefixed=True)
+REDIS_PORT = get_env_var('REDIS_PORT', '', prefixed=True)
+REDIS_DB = get_env_var('REDIS_DB', '', prefixed=True)
+REDIS_PASSWORD = get_env_var('REDIS_PASSWORD', '', prefixed=True)
+REDIS_SENTINEL_MASTER = get_env_var('REDIS_SENTINEL_MASTER', '', prefixed=True)
 
 # celery config
-CELERY_TIMEZONE = get_env_var("CELERY_TIMEZONE", "UTC")
+CELERY_TIMEZONE = get_env_var("CELERY_TIMEZONE", "UTC", prefixed=True)

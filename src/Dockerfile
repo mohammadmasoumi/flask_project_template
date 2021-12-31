@@ -7,19 +7,17 @@ ENV GROUP_ID=2000 \
     USER_NAME=flask
 
 COPY / /src
-
-WORKDIR src
+WORKDIR /src
 
 RUN apt-get update \
     && apt-get -y install libsnappy-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pip install pip --upgrade pip \
-    && pip install -r requirements/production.txt
-
-RUN addgroup -gid $GROUP_ID $USER_NAME
-RUN useradd -u $USER_ID -g $USER_NAME -ms /bin/bash $USER_NAME
+    && pip install -r requirements/production.txt \
+    && addgroup -gid $GROUP_ID $USER_NAME  \
+    && useradd -u $USER_ID -g $USER_NAME -ms /bin/bash $USER_NAME
 
 USER $USER_NAME
-
 EXPOSE 5000
-CMD [ "gunicorn", "wsgi:app", "--config=config.py", "--log-level=debug"]
+
+CMD [ "gunicorn", "app:app", "--config=config.py", "--log-level=debug"]

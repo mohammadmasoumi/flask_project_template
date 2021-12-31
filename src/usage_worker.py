@@ -1,6 +1,8 @@
 from celery import Celery
 
-from src.project.app import create_worker_app
+from src.factory import create_worker_app
+
+
 # from src.tasks.long_task import log
 # from src.tasks.long_task import reverse_messages
 
